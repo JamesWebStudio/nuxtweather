@@ -1,0 +1,547 @@
+LocalForecast
+
+[ 
+    { "dt": 1672768800, "main": { "temp": 10.08, "feels_like": 9.62, "temp_min": 10.08, "temp_max": 10.48, "pressure": 1011, "sea_level": 1011, "grnd_level": 993, "humidity": 95, "temp_kf": -0.4 }, "weather": [ { "id": 500, "main": "Rain", "description": "light rain", "icon": "10n" } ], "clouds": { "all": 92 }, "wind": { "speed": 8.61, "deg": 205, "gust": 16.93 }, "visibility": 10000, "pop": 1, "rain": { "3h": 2.92 }, "sys": { "pod": "n" }, "dt_txt": "2023-01-03 18:00:00" },
+    { "dt": 1672779600, "main": { "temp": 11.04, "feels_like": 10.68, "temp_min": 11.04, "temp_max": 11.04, "pressure": 1009, "sea_level": 1009, "grnd_level": 993, "humidity": 95, "temp_kf": 0 }, "weather": [ { "id": 500, "main": "Rain", "description": "light rain", "icon": "10n" } ], "clouds": { "all": 100 }, "wind": { "speed": 8.28, "deg": 220, "gust": 17.03 }, "visibility": 10000, "pop": 1, "rain": { "3h": 1.82 }, "sys": { "pod": "n" }, "dt_txt": "2023-01-03 21:00:00" }, 
+    { "dt": 1672790400, "main": { "temp": 11.17, "feels_like": 10.72, "temp_min": 11.17, "temp_max": 11.17, "pressure": 1010, "sea_level": 1010, "grnd_level": 993, "humidity": 91, "temp_kf": 0 }, "weather": [ { "id": 500, "main": "Rain", "description": "light rain", "icon": "10n" } ], "clouds": { "all": 100 }, "wind": { "speed": 9.1, "deg": 226, "gust": 18.04 }, "visibility": 10000, "pop": 0.99, "rain": { "3h": 1.05 }, "sys": { "pod": "n" }, "dt_txt": "2023-01-04 00:00:00" }, 
+    { "dt": 1672801200, "main": { "temp": 11.15, "feels_like": 10.62, "temp_min": 11.15, "temp_max": 11.15, "pressure": 1009, "sea_level": 1009, "grnd_level": 993, "humidity": 88, "temp_kf": 0 }, "weather": [ { "id": 500, "main": "Rain", "description": "light rain", "icon": "10n" } ], "clouds": { "all": 100 }, "wind": { "speed": 9.27, "deg": 228, "gust": 19.43 }, "visibility": 10000, "pop": 0.25, "rain": { "3h": 0.13 }, "sys": { "pod": "n" }, "dt_txt": "2023-01-04 03:00:00" }, 
+    { "dt": 1672812000, "main": { "temp": 11.6, "feels_like": 11.01, "temp_min": 11.6, "temp_max": 11.6, "pressure": 1010, "sea_level": 1010, "grnd_level": 993, "humidity": 84, "temp_kf": 0 }, "weather": [ { "id": 500, "main": "Rain", "description": "light rain", "icon": "10n" } ], "clouds": { "all": 100 }, "wind": { "speed": 8.35, "deg": 239, "gust": 16.83 }, "visibility": 10000, "pop": 0.24, "rain": { "3h": 0.25 }, "sys": { "pod": "n" }, "dt_txt": "2023-01-04 06:00:00" } 
+]
+
+
+// One Row
+{ 
+    "dt": 1672768800, 
+    "main": { "temp": 10.08, "feels_like": 9.62, "temp_min": 10.08, "temp_max": 10.48, "pressure": 1011, "sea_level": 1011, "grnd_level": 993, "humidity": 95, "temp_kf": -0.4 }, 
+    "weather": [ { "id": 500, "main": "Rain", "description": "light rain", "icon": "10n" } ], 
+    "clouds": { "all": 92 }, 
+    "wind": { "speed": 8.61, "deg": 205, "gust": 16.93 }, 
+    "visibility": 10000, "pop": 1, "rain": { "3h": 2.92 }, 
+    "sys": { "pod": "n" }, 
+    "dt_txt": "2023-01-03 18:00:00" 
+}
+
+weather Images
+ light rain
+ rain
+ heavy rain
+
+ clear 
+ scattered/isolated clouds
+ overcast
+
+ light wind
+ moderate wind
+ strong wind
+ thunderstorm
+
+ sunny
+ misty
+
+
+COUNTRY CODES
+
+AF
+	Afghanistan
+AX
+	Aland Islands
+AL
+	Albania
+DZ
+	Algeria
+AS
+	American Samoa
+AD
+	Andorra
+AO
+	Angola
+AI
+	Anguilla
+AQ
+	Antarctica
+AG
+	Antigua and Barbuda
+AR
+	Argentina
+AM
+	Armenia
+AW
+	Aruba
+AU
+	Australia
+AT
+	Austria
+AZ
+	Azerbaijan
+BS
+	Bahamas
+BH
+	Bahrain
+BD
+	Bangladesh
+BB
+	Barbados
+BY
+	Belarus
+BE
+	Belgium
+BZ
+	Belize
+BJ
+	Benin
+BM
+	Bermuda
+BT
+	Bhutan
+BO
+	Bolivia
+BQ
+	Bonaire, Saint Eustatius and Saba
+BA
+	Bosnia and Herzegovina
+BW
+	Botswana
+BV
+	Bouvet Island
+BR
+	Brazil
+IO
+	British Indian Ocean Territory
+VG
+	British Virgin Islands
+BN
+	Brunei
+BG
+	Bulgaria
+BF
+	Burkina Faso
+BI
+	Burundi
+KH
+	Cambodia
+CM
+	Cameroon
+CA
+	Canada
+CV
+	Cape Verde
+KY
+	Cayman Islands
+CF
+	Central African Republic
+TD
+	Chad
+CL
+	Chile
+CN
+	China
+CX
+	Christmas Island
+CC
+	Cocos Islands
+CO
+	Colombia
+KM
+	Comoros
+CK
+	Cook Islands
+CR
+	Costa Rica
+HR
+	Croatia
+CU
+	Cuba
+CW
+	Curacao
+CY
+	Cyprus
+CZ
+	Czech Republic
+CD
+	Democratic Republic of the Congo
+DK
+	Denmark
+DJ
+	Djibouti
+DM
+	Dominica
+DO
+	Dominican Republic
+TL
+	East Timor
+EC
+	Ecuador
+EG
+	Egypt
+SV
+	El Salvador
+GQ
+	Equatorial Guinea
+ER
+	Eritrea
+EE
+	Estonia
+ET
+	Ethiopia
+FK
+	Falkland Islands
+FO
+	Faroe Islands
+FJ
+	Fiji
+FI
+	Finland
+FR
+	France
+GF
+	French Guiana
+PF
+	French Polynesia
+TF
+	French Southern Territories
+GA
+	Gabon
+GM
+	Gambia
+GE
+	Georgia
+DE
+	Germany
+GH
+	Ghana
+GI
+	Gibraltar
+GR
+	Greece
+GL
+	Greenland
+GD
+	Grenada
+GP
+	Guadeloupe
+GU
+	Guam
+GT
+	Guatemala
+GG
+	Guernsey
+GN
+	Guinea
+GW
+	Guinea-Bissau
+GY
+	Guyana
+HT
+	Haiti
+HM
+	Heard Island and McDonald Islands
+HN
+	Honduras
+HK
+	Hong Kong
+HU
+	Hungary
+IS
+	Iceland
+IN
+	India
+ID
+	Indonesia
+IR
+	Iran
+IQ
+	Iraq
+IE
+	Ireland
+IM
+	Isle of Man
+IL
+	Israel
+IT
+	Italy
+CI
+	Ivory Coast
+JM
+	Jamaica
+JP
+	Japan
+JE
+	Jersey
+JO
+	Jordan
+KZ
+	Kazakhstan
+KE
+	Kenya
+KI
+	Kiribati
+XK
+	Kosovo
+KW
+	Kuwait
+KG
+	Kyrgyzstan
+LA
+	Laos
+LV
+	Latvia
+LB
+	Lebanon
+LS
+	Lesotho
+LR
+	Liberia
+LY
+	Libya
+LI
+	Liechtenstein
+LT
+	Lithuania
+LU
+	Luxembourg
+MO
+	Macao
+MK
+	Macedonia
+MG
+	Madagascar
+MW
+	Malawi
+MY
+	Malaysia
+MV
+	Maldives
+ML
+	Mali
+MT
+	Malta
+MH
+	Marshall Islands
+MQ
+	Martinique
+MR
+	Mauritania
+MU
+	Mauritius
+YT
+	Mayotte
+MX
+	Mexico
+FM
+	Micronesia
+MD
+	Moldova
+MC
+	Monaco
+MN
+	Mongolia
+ME
+	Montenegro
+MS
+	Montserrat
+MA
+	Morocco
+MZ
+	Mozambique
+MM
+	Myanmar
+NA
+	Namibia
+NR
+	Nauru
+NP
+	Nepal
+NL
+	Netherlands
+AN
+	Netherlands Antilles
+NC
+	New Caledonia
+NZ
+	New Zealand
+NI
+	Nicaragua
+NE
+	Niger
+NG
+	Nigeria
+NU
+	Niue
+NF
+	Norfolk Island
+KP
+	North Korea
+MP
+	Northern Mariana Islands
+NO
+	Norway
+OM
+	Oman
+PK
+	Pakistan
+PW
+	Palau
+PS
+	Palestinian Territory
+PA
+	Panama
+PG
+	Papua New Guinea
+PY
+	Paraguay
+PE
+	Peru
+PH
+	Philippines
+PN
+	Pitcairn
+PL
+	Poland
+PT
+	Portugal
+PR
+	Puerto Rico
+QA
+	Qatar
+CG
+	Republic of the Congo
+RE
+	Reunion
+RO
+	Romania
+RU
+	Russia
+RW
+	Rwanda
+BL
+	Saint Barthelemy
+SH
+	Saint Helena
+KN
+	Saint Kitts and Nevis
+LC
+	Saint Lucia
+MF
+	Saint Martin
+PM
+	Saint Pierre and Miquelon
+VC
+	Saint Vincent and the Grenadines
+WS
+	Samoa
+SM
+	San Marino
+ST
+	Sao Tome and Principe
+SA
+	Saudi Arabia
+SN
+	Senegal
+RS
+	Serbia
+CS
+	Serbia and Montenegro
+SC
+	Seychelles
+SL
+	Sierra Leone
+SG
+	Singapore
+SX
+	Sint Maarten
+SK
+	Slovakia
+SI
+	Slovenia
+SB
+	Solomon Islands
+SO
+	Somalia
+ZA
+	South Africa
+GS
+	South Georgia and the South Sandwich Islands
+KR
+	South Korea
+SS
+	South Sudan
+ES
+	Spain
+LK
+	Sri Lanka
+SD
+	Sudan
+SR
+	Suriname
+SJ
+	Svalbard and Jan Mayen
+SZ
+	Swaziland
+SE
+	Sweden
+CH
+	Switzerland
+SY
+	Syria
+TW
+	Taiwan
+TJ
+	Tajikistan
+TZ
+	Tanzania
+TH
+	Thailand
+TG
+	Togo
+TK
+	Tokelau
+TO
+	Tonga
+TT
+	Trinidad and Tobago
+TN
+	Tunisia
+TR
+	Turkey
+TM
+	Turkmenistan
+TC
+	Turks and Caicos Islands
+TV
+	Tuvalu
+VI
+	U.S. Virgin Islands
+UG
+	Uganda
+UA
+	Ukraine
+AE
+	United Arab Emirates
+GB
+	United Kingdom
+US
+	United States
+UM
+	United States Minor Outlying Islands
+UY
+	Uruguay
+UZ
+	Uzbekistan
+VU
+	Vanuatu
+VA
+	Vatican
+VE
+	Venezuela
+VN
+	Vietnam
+WF
+	Wallis and Futuna
+EH
+	Western Sahara
+YE
+	Yemen
+ZM
+	Zambia
+ZW
+	Zimbabwe
