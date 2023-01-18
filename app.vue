@@ -3,7 +3,7 @@
     <h1 class="text-center text-blue-500 text-5xl font-serif">Nuxt Weather</h1>
   </div>
   <div class="locationBar">
-    <img :src="mainWeatherImage" id="mainImage" v-if="!loading" class="fade-in">
+    <img :src="mainWeatherImage" alt="Local Weather Image" id="mainImage" v-if="!loading" class="fade-in">
     <h5 class="bar heartbeat" v-if="loading">Getting your local weather, please wait...</h5>
     <div class="locationText scale-in-ver-center" v-else>
       <h4>Your Weather in {{ myLocation }} is </h4>
@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="locationBar-small">
-    <img :src="mainWeatherImage" id="mainImage">
+    <img :src="mainWeatherImage" alt="Local Weather Image" id="mainImage">
     <div class="locationText scale-in-ver-center">
       <h4>Your Weather in {{ myLocation }} is </h4>
       <h4>{{  localWeather.description }}</h4>
@@ -36,7 +36,7 @@
           <h3>Wind Speed {{ day.wind.speed }}mph</h3>
           <h3>Humidity {{  day.main.humidity }}&#176;</h3>
           <div style="background-color: #DBEAFE; min-width: 300px; max-width:320px; margin: 20px auto;">
-            <img :src="`https://openweathermap.org/img/wn/${day.weather[0].icon}@4x.png`" width="128" height="128" alt="Weather Image">
+            <img :src="`https://openweathermap.org/img/wn/${day.weather[0].icon}@4x.png`" width="128" height="128" alt="Weather Icon">
           </div>
           <h3 style="color: red;">Feels Like {{ day.main.feels_like }}&#8451;</h3>
         </div>
@@ -48,7 +48,7 @@
     <form>
       <div>
         <label for="city">City</label>
-        <input type="text" name="city" v-model="searchCity" class="search-input">
+        <input type="text" name="city" v-model="searchCity" class="search-input" aria-labelledby="city">
       </div>
       <div>
         <label for="codes">Country</label>
@@ -56,6 +56,7 @@
           <option v-for="code in countryCodes" :value="code.name">
           {{ code.name }}, {{  code.code }}</option>
         </select>
+        <p>Country needed for accurate result in case of duplicate cities names</p>
       </div>
       <button @click.prevent="search" class="btn">Search</button>
       <p v-if="loadingGlobalWeather">Getting your weather for {{ savedSearchCity }}</p>
@@ -69,7 +70,7 @@
     <h4>Wind speed is {{ searchedCityWeather.windSpeed }}mph</h4>
     <h4 class="feels-like">Feels Like: {{ searchedCityWeather.feels_like }}&#8451;</h4>
     <div class="icon-box text-center bg-blue-100 w-32 mx-auto">
-      <img :src="`https://openweathermap.org/img/wn/${searchedCityWeather.icon}@4x.png`" width="128" height="128" alt="Weather Image" />
+      <img :src="`https://openweathermap.org/img/wn/${searchedCityWeather.icon}@4x.png`" width="128" height="128" alt="Weather Icon" />
     </div>
     </section>
     <h2 class="section-title" v-if="globalForecast.length > 0">5 Day Forecast for {{ searchCity.toUpperCase() }}</h2>
@@ -82,7 +83,7 @@
         <h3>Wind Speed {{ day.wind.speed }}mph</h3>
         <h3>Humidity {{  day.main.humidity }}&#176;</h3>
         <div style="background-color: #DBEAFE; width: 100vw; max-width:320px; margin: 20px 0;">
-          <img :src="`https://openweathermap.org/img/wn/${day.weather[0].icon}@4x.png`" width="128" height="128" alt="Weather Image">
+          <img :src="`https://openweathermap.org/img/wn/${day.weather[0].icon}@4x.png`" width="128" height="128" alt="Weather Icon">
         </div>
         <h3 style="color: red;">Feels Like {{ day.main.feels_like }}&#8451;</h3>
       </div>
@@ -137,7 +138,7 @@ let globalForecast = ref([])
 let savedSearchCity = ref('')
 let imgElement = ref(null)
 let mainWeatherImage = ref('')
-let selected = ref('UK')
+let selected = ref('GB')
 let searchError = ref('')
 
 // success method for Navigator call
@@ -145,14 +146,14 @@ async function success(position) {
   lat.value = position.coords.latitude
   lng.value = position.coords.longitude
   
-   fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat.value}&longitude=${lng.value}&localityLanguage=en`)
-    .then(res => res.json())
-    .then(data => {
-      myLocation.value = data.city
-    })
-    .catch(err => {
-      myLocation.value = "Error, failed to load local weather"
-    })
+  fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat.value}&longitude=${lng.value}&localityLanguage=en`)
+  .then(res => res.json())
+  .then(data => {
+    myLocation.value = data.city
+  })
+  .catch(err => {
+    myLocation.value = "Error, failed to load local weather"
+  })
 
   fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat.value}&lon=${lng.value}&appid=${API_KEY}&units=metric`)
   .then(res => res.json())
@@ -163,8 +164,7 @@ async function success(position) {
     localWeather.value.icon = data.weather[0].icon
     localWeather.value.feels_like = data.main.feels_like
     localWeather.value.humidity = data.main.humidity
-    mainWeatherImage.value = data.weather[0].description
-    
+        
     switch (data.weather[0].description) {
       case 'clear sky': {
         mainWeatherImage.value = `/weatherImages/clearsky.webp`
@@ -175,116 +175,118 @@ async function success(position) {
         break;
       }
       case 'scattered clouds': {
-        mainWeatherImage.value = '/weatherImages/scatteredClouds.avif'
+        mainWeatherImage.value = '/weatherImages/scatteredClouds.webp'
         break;
       }
       case 'broken clouds': {
-        mainWeatherImage.value = '/weatherImages/brokenclouds.jpg'
+        mainWeatherImage.value = '/weatherImages/brokenclouds.webp'
         break;
       }
       case 'light rain': {
-        mainWeatherImage.value = '/weatherImages/light-rain.png'
+        mainWeatherImage.value = '/weatherImages/light-rain.webp'
         break;
       }
       case 'rain': {
-        mainWeatherImage.value = '/weatherImages/heavyrain.jpg'
+        mainWeatherImage.value = '/weatherImages/heavyrain.webp'
         break;
       }
       case 'thunderstorm': {
-        mainWeatherImage.value = '/weatherImages/heavyrain.jpg'
+        mainWeatherImage.value = '/weatherImages/thunderstorm.webp'
         break;
       }
       case 'snow': {
-        mainWeatherImage.value = '/weatherImages/snowheavy.jpg'
+        mainWeatherImage.value = '/weatherImages/snowheavy.webp'
         break;
       }
       case 'mist': {
-        mainWeatherImage.value = '/weatherImages/mist.jpg'
+        mainWeatherImage.value = '/weatherImages/mist.webp'
+        break;
       }
-      case 'light intensity drizzle': { /
-        mainWeatherImage.value = '/weatherImages/light-rain.png'
+      case 'light intensity drizzle': {
+        mainWeatherImage.value = '/weatherImages/light-rain.webp'
+        break;
       }
       default: {
         mainWeatherImage.value = '/weatherImages/multiple-weather.webp'
       }
     }
-    loading.value = false
-    FiveDayForecast('local')
+      loading.value = false
+      FiveDayForecast('local')
+    })
+  }
+
+  // Error function for Navigator call
+  function error() {
+    myLocation.value = "Failed to get your location"
+  }
+
+  onMounted(() => {
+    if(window.navigator) {
+      navigator.geolocation.getCurrentPosition(success, error, {
+        enableHighAccuracy: true
+      })
+    }
+    imgElement = document.getElementsByClassName('locationBar')[0]
+    imgElement.style.backgroundImage = mainWeatherImage
   })
-}
 
-// Error function for Navigator call
-function error() {
-  myLocation.value = "Failed to get your location"
-}
-
-onMounted(() => {
-  if(window.navigator) {
-    navigator.geolocation.getCurrentPosition(success, error, {
-      enableHighAccuracy: true
-    })
-  }
-  imgElement = document.getElementsByClassName('locationBar')[0]
-  imgElement.style.backgroundImage = mainWeatherImage
-})
-
-// Search method to get weather for selected location
-function search() {
-  searchError.value = ''
-  if(searchCity.value === '' || selected.value === '') { 
-    searchError.value = "City and Country required"
-    return 
-  } 
-  searchedLoading.value = true
-  savedSearchCity.value = searchCity.value.toUpperCase()
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${savedSearchCity.value},${selected.value}&appid=${API_KEY}&units=metric`)
-  .then(res => res.json())
-  .then(searchData => {
-    searchedCityWeather.value.weather = searchData.weather[0].description
-    searchedCityWeather.value.temp = searchData.main.temp
-    searchedCityWeather.value.windSpeed = searchData.wind.speed
-    searchedCityWeather.value.windDirection = searchData.wind.deg
-    searchedCityWeather.value.icon = searchData.weather[0].icon
-    searchedCityWeather.value.feels_like = searchData.main.feels_like
-    searchedCityWeather.value.humidity = searchData.main.humidity
-    searchedCityWeather.value.lat = searchData.coord.lat
-    searchedCityWeather.value.lng = searchData.coord.lon
+  // Search method to get weather for selected location
+  function search() {
+    searchError.value = ''
+    if(searchCity.value === '' || selected.value === '') { 
+      searchError.value = "City and Country required"
+      return 
+    } 
+    searchedLoading.value = true
+    savedSearchCity.value = searchCity.value.toUpperCase()
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${savedSearchCity.value},${selected.value}&appid=${API_KEY}&units=metric`)
+    .then(res => res.json())
+    .then(searchData => {
+      searchedCityWeather.value.weather = searchData.weather[0].description
+      searchedCityWeather.value.temp = searchData.main.temp
+      searchedCityWeather.value.windSpeed = searchData.wind.speed
+      searchedCityWeather.value.windDirection = searchData.wind.deg
+      searchedCityWeather.value.icon = searchData.weather[0].icon
+      searchedCityWeather.value.feels_like = searchData.main.feels_like
+      searchedCityWeather.value.humidity = searchData.main.humidity
+      searchedCityWeather.value.lat = searchData.coord.lat
+      searchedCityWeather.value.lng = searchData.coord.lon
+      searchedLoading.value = false
+      FiveDayForecast('global') 
+  })
+  .catch(err => {
+    searchError.value = 'No result found. Please check city & country'
     searchedLoading.value = false
-    FiveDayForecast('global') 
- })
- .catch(err => {
-  searchError.value = 'No result found. Please check city & country'
-  searchedLoading.value = false
- })
-}
+  })
+  }
 
-// Get the 5 day forecast for local city or searched city
-function FiveDayForecast(location) {
-  if(location === 'local') {
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat.value}&lon=${lng.value}&appid=${API_KEY}&units=metric`)
-    .then(res => res.json())
-    .then(data => {
-      localForecast.value = data.list.slice(1, 6)
-      selected.value = ''
-      savedSearchCity.value = ''
-    })
-    .catch(err => {
-      console.log(err.message)
-    })
+  // Get the 5 day forecast for local city or searched city
+  function FiveDayForecast(location) {
+    if(location === 'local') {
+      fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat.value}&lon=${lng.value}&appid=${API_KEY}&units=metric`)
+      .then(res => res.json())
+      .then(data => {
+        localForecast.value = data.list.slice(1, 6)
+        selected.value = ''
+        savedSearchCity.value = ''
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
+    }
+    else {
+      // loadingGlobalWeather.value = true
+      fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${searchedCityWeather.value.lat}&lon=${searchedCityWeather.value.lng}&appid=${API_KEY}&units=metric`)
+      .then(res => res.json())
+      .then(data => {
+        globalForecast.value = data.list.slice(1, 6)
+        // loadingGlobalWeather.value = false
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
+    }
   }
-  else {
-    // loadingGlobalWeather.value = true
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${searchedCityWeather.value.lat}&lon=${searchedCityWeather.value.lng}&appid=${API_KEY}&units=metric`)
-    .then(res => res.json())
-    .then(data => {
-      globalForecast.value = data.list.slice(1, 6)
-      // loadingGlobalWeather.value = false
-    })
-    .catch(err => {
-      console.log(err.message)
-    })
-  }
-}
 </script>
 
 <style scoped>
@@ -319,9 +321,13 @@ function FiveDayForecast(location) {
   align-items:center;
 }
 
-.locationBar, .searchedData, .bar {
+.locationBar, .searchedData {
   text-align:center;
   font-size: 1.5rem;
+}
+
+.bar {
+  font-size: 1rem;
 }
 
 .locationBar-small {
@@ -485,17 +491,22 @@ form select {
 }
 
 footer {
-  max-width: 100vw;
+  width: 100vw;
+  max-width:100vw;
+  overflow-x: hidden;
   display:flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   background-color: #DBEAFE;
   color: black;
-  padding:30px;
+  /* padding:30px; */
   position: sticky;
   top: calc(100vh - 60px);
   left: 0;
+  /* position: fixed;
+  left: 0;
+  bottom: 0; */
   text-align: center;
 }
 
